@@ -22,13 +22,32 @@
   }
 
   &__footer {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: $pp-spacing-md $pp-spacing-sm;
     border-top: 1px solid $grey-color-light;
 
     [pp-card-footer] {
       font-size: 12px;
       color: $grey-color;
+    }
+
+    .footer__action {
+      opacity: 0;
+      transition: opacity .15s ease-out;
+
+      [pp-button] {
+        margin-left: $pp-spacing-sm;
+      }
+
+      .pp-card:hover & {
+        opacity: 1;
+      }
+
+      @media (max-width: $device-width-tablet) {
+        opacity: 1;
+      }
     }
   }
 }

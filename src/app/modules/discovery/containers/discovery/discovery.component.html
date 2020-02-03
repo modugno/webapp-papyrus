@@ -2,28 +2,45 @@
 
 <main class="section__container">
   <div class="container content">
-    <pp-card-text-field>
-      <input
-        pp-input
-        name="title"
-        placeholder="O que encontrou?"
-        autocomplete="off"
-        type="text">
-      <textarea
-        pp-input
-        placeholder="Como era?"
-        autocomplete="off"
-        name="description"></textarea>
-    </pp-card-text-field>
+    <form [formGroup]="formGroup">
+      <pp-card-text-field
+        [class.expanded]="formGroup.get('title').value || formGroup.get('description').value"
+        (onSave$)="onSave($event)"
+        (onClose$)="onClose($event)">
+        <input
+          pp-input
+          formControlName="title"
+          name="title"
+          placeholder="O que encontrou?"
+          autocomplete="off"
+          type="text">
+        <textarea
+          pp-input
+          formControlName="description"
+          name="description"
+          placeholder="Como era?"
+          autocomplete="off"></textarea>
+      </pp-card-text-field>
+    </form>
 
-    <div class="section__cards">
+    <div class="section__no-content" *ngIf="!collection">
+      <h3>Carregando...</h3>
+    </div>
+    <div class="section__no-content" *ngIf="collection?.length === 0">
+      <h3>Nenhuma descoberta encontrada</h3>
+    </div>
+    <div class="section__cards" *ngIf="collection?.length">
       <h1 class="section__title">Descobertas</h1>
 
       <div class="cards__list">
-        <pp-card>
-          <span pp-card-title>Título</span>
-          <span pp-card-description>Descrição</span>
-          <span pp-card-footer>Footer</span>
+        <pp-card *ngFor="let discovery of collection; let i = index">
+          <span pp-card-title *ngIf="discovery.title">{{ discovery.title }}</span>
+          <span pp-card-description *ngIf="discovery.description">{{ discovery.description }}</span>
+          <span pp-card-date *ngIf="discovery.date">{{ discovery.date | date: 'dd/MM/yyy hh:mm' }}</span>
+          <ng-container pp-card-action>
+            <button pp-button color="neutral" (click)="onEdit(discovery)">Editar</button>
+            <button pp-button color="danger" (click)="onRemove(discovery, i)">Remover</button>
+          </ng-container>
         </pp-card>
       </div>
     </div>

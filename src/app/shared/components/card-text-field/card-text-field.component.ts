@@ -1,9 +1,10 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   ViewEncapsulation,
-  Directive
+  Directive,
+  EventEmitter,
+  Output
 } from '@angular/core';
 
 @Directive({
@@ -12,6 +13,7 @@ import {
     class: 'pp-button',
     '[class.primary]': "color === 'primary'",
     '[class.neutral]': "color === 'neutral'",
+    '[class.danger]': "color === 'danger'",
   },
   inputs: ['color']
 })
@@ -38,18 +40,23 @@ export class PpInputDirective {}
     '[attr.tabindex]': '0'
   }
 })
-export class CardTextFieldComponent implements OnInit {
-  public focused: boolean;
-  constructor() { }
+export class CardTextFieldComponent {
 
-  ngOnInit() {
-  }
+  public focused: boolean;
+
+  @Output()
+  public onSave$ = new EventEmitter(false);
+
+  @Output()
+  public onClose$ = new EventEmitter(false);
 
   save() {
     this.focused = false;
+    this.onSave$.emit(true);
   }
 
   close() {
     this.focused = false;
+    this.onClose$.emit(true);
   }
 }

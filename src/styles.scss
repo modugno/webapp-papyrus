@@ -52,6 +52,17 @@ body {
     color: $grey-color;
     margin: $pp-spacing-md 0;
   }
+
+  &__no-content {
+    margin: $pp-spacing-lg 0;
+
+    h3 {
+      @include make-typography(20);
+      text-align: center;
+      color: $black-color;
+      margin: 0;
+    }
+  }
 }
 
 .cards {
