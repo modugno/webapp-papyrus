@@ -1,0 +1,41 @@
+<pp-header></pp-header>
+
+<main class="section__container">
+  <div class="container content">
+    <form [formGroup]="formGroup">
+      <pp-card-text-field
+        [class.expanded]="!!formGroup.get('description').value"
+        (onSave$)="onSave($event)"
+        (onClose$)="onClose($event)">
+        <input
+          pp-input
+          formControlName="description"
+          name="description"
+          placeholder="Escrever..."
+          autocomplete="off"
+          type="text">
+      </pp-card-text-field>
+    </form>
+
+    <div class="section__no-content" *ngIf="!collection">
+      <h3>Carregando...</h3>
+    </div>
+    <div class="section__no-content" *ngIf="collection?.length === 0">
+      <h3>Nenhum comentário encontrado</h3>
+    </div>
+    <div class="section__cards" *ngIf="collection?.length">
+      <h1 class="section__title">Comentários</h1>
+
+      <div class="cards__list">
+        <pp-card *ngFor="let comment of collection; let i = index">
+          <span pp-card-description *ngIf="comment.description">{{ comment.description }}</span>
+          <span pp-card-date *ngIf="comment.created_at">{{ comment.created_at | date: 'dd/MM/yyy hh:mm' }}</span>
+          <ng-container pp-card-action>
+            <button pp-button color="neutral" (click)="onEdit(comment)">Editar</button>
+            <button pp-button color="danger" (click)="onRemove(comment, i)">Remover</button>
+          </ng-container>
+        </pp-card>
+      </div>
+    </div>
+  </div>
+</main>

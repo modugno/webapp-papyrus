@@ -1,0 +1,12 @@
+@import 'src/assets/scss/variables';
+
+.pp-comment {
+
+  &__container {
+    @extend %section;
+  }
+
+  &__cards {
+    margin-top: $pp-spacing-lg;
+  }
+}

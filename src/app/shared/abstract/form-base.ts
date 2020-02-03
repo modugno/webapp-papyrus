@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Discovery } from 'src/app/modules/discovery/shared/interface/discovery';
-import { Comment } from 'src/app/modules/discovery/shared/interface/comment';
+import { Comment } from 'src/app/modules/comment/shared/interface/comment';
 
 export abstract class FormBase {
 
