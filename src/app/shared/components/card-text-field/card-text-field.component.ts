@@ -4,7 +4,8 @@ import {
   ViewEncapsulation,
   Directive,
   EventEmitter,
-  Output
+  Output,
+  Input
 } from '@angular/core';
 
 @Directive({
@@ -14,10 +15,11 @@ import {
     '[class.primary]': "color === 'primary'",
     '[class.neutral]': "color === 'neutral'",
     '[class.danger]': "color === 'danger'",
-  },
-  inputs: ['color']
+  }
 })
-export class PpButtonDirective {}
+export class PpButtonDirective {
+  @Input() color: string;
+}
 
 @Directive({
   selector: 'input[pp-input], textarea[pp-input]',

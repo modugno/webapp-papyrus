@@ -5,8 +5,8 @@
     <form [formGroup]="formGroup">
       <pp-card-text-field
         [class.expanded]="!!formGroup.get('description').value"
-        (onSave$)="onSave($event)"
-        (onClose$)="onClose($event)">
+        (onSave$)="onSave()"
+        (onClose$)="onClose()">
         <input
           pp-input
           formControlName="description"
