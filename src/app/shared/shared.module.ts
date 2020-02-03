@@ -7,6 +7,7 @@ import { PpSearchComponent } from './components/pp-search/pp-search.component';
 import { PpHeaderComponent } from './components/pp-header/pp-header.component';
 import { CardTextFieldComponent, PpButtonDirective, PpInputDirective } from './components/card-text-field/card-text-field.component';
 import { PpCardComponent } from './components/pp-card/pp-card.component';
+import { RouterModule } from '@angular/router';
 
 const components = [
   PpToolbarComponent,
@@ -28,7 +29,8 @@ const components = [
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class SharedModule { }
