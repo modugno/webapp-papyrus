@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'src/assets/scss/variables';
+@import 'src/assets/scss/mixins';
+
+html,
+body {
+  box-sizing: border-box;
+  font-family: $font-family;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+%container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container {
+  @extend %container;
+
+  &-flex {
+    @extend %container;
+    display: flex;
+    &.align-center {
+      align-items: center;
+    }
+  }
+}
+
+.content {
+  display: block;
+  padding: $pp-spacing-lg 0;
+}
+
+.section {
+
+  &__container {
+    @extend %section;
+  }
+
+  &__cards {
+    margin-top: $pp-spacing-lg;
+  }
+
+  &__title {
+    @include make-typography(16);
+    color: $grey-color;
+    margin: $pp-spacing-md 0;
+  }
+}
+
+.cards {
+  &__list {
+    pp-card {
+      display: block;
+      margin-bottom: $pp-spacing-md;
+    }
+  }
+}

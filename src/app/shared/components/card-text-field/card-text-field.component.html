@@ -1,0 +1,22 @@
+<div
+  class="pp-card-text-field__input"
+  (click)="focused = true">
+  <ng-content select="input[pp-input], textarea[pp-input]"></ng-content>
+</div>
+
+<div class="pp-card-text-field__action">
+  <button
+    pp-button
+    color="primary"
+    (click)="save()"
+    type="button">
+      Salvar
+  </button>
+  <button
+    pp-button
+    color="neutral"
+    (click)="close()"
+    type="button">
+      Cancelar
+  </button>
+</div>

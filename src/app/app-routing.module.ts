@@ -5,8 +5,9 @@ import { CommentModule } from './modules/comment/comment.module';
 
 const routes: Routes = [
   {
-    path: '/',
-    redirectTo: 'discovery'
+    path: '',
+    redirectTo: '/discovery',
+    pathMatch: 'full'
   },
   {
     path: 'discovery',

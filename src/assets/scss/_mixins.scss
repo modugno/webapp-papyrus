@@ -1,0 +1,7 @@
+@import './variables';
+
+@mixin make-typography($size: 16, $weight: normal) {
+  font-family: $font-family;
+  font-size: ($size / 16) * 1rem;
+  font-weight: $weight;
+}

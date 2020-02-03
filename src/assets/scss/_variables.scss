@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+// spacing
+$pp-spacing-sm: 8px;
+$pp-spacing-md: 16px;
+$pp-spacing-lg: 32px;
+
+// colors
+$primary-color: #C67234;
+$grey-color: #999;
+$grey-color-light: #ebebeb;
+$black-color: #414141;
+$white-color: #fff;
+
+// fonts
+$font-family: 'Roboto', sans-serif;
+
+%section {
+  position: relative;
+  display: block;
+  padding: 0 $pp-spacing-md;
+}
+
+%card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid $grey-color-light;
+  box-sizing: border-box;
+  border-radius: 4px;
+  outline: 0;
+  background-color: $white-color;
+}

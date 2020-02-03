@@ -1,0 +1,71 @@
+@import 'src/assets/scss/variables';
+
+.pp-card-text-field {
+  @extend %card;
+  padding: $pp-spacing-md $pp-spacing-sm;
+  transition: box-shadow .2s ease;
+
+  &.expanded {
+    box-shadow: 1px 1px 5px $grey-color;
+    border-color: transparent;
+  }
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__action {
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: $pp-spacing-md;
+
+    .pp-button {
+      margin-left: 10px;
+    }
+
+    .expanded & {
+      display: flex;
+    }
+  }
+}
+
+.pp-button {
+  font-size: 16px;
+  appearance: none;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+
+  &.primary {
+    background-color: $primary-color;
+    color: $white-color;
+  }
+
+  &.neutral {
+    background-color: $grey-color-light;
+    color: $black-color;
+  }
+}
+
+.pp-input {
+  font-size: 16px;
+  padding: $pp-spacing-md;
+  color: $black-color;
+  background-color: #fff;
+  border: none;
+  outline: 0;
+}
+
+input.pp-input {
+  font-size: 1.2em;
+}
+
+textarea.pp-input {
+  display: none;
+  .expanded & {
+    display: block;
+  }
+}

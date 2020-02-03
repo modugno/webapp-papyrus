@@ -1,0 +1,32 @@
+@import 'src/assets/scss/variables';
+
+.pp-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1 1;
+  margin-left: $pp-spacing-md;
+
+  &__list {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+
+  &__item {
+    margin-left: 10px;
+    a {
+      text-decoration: none;
+      outline: 0;
+    }
+
+    svg {
+      fill: $white-color;
+    }
+  }
+}
