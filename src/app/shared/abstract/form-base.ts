@@ -12,15 +12,15 @@ export abstract class FormBase {
     protected _fb: FormBuilder
   ) {}
 
-  public formGroup: FormGroup;
-  protected _getControl = (field) => this.formGroup.get(field);
-  protected _getValue = (field) => this._getControl(field).value;
+  formGroup: FormGroup;
+  collectionData: Discovery[] | Comment[] | any[] = [];
+  collection = this.collectionData;
   protected _destroyed = new Subject<void>();
+  
+  _getControl = (field) => this.formGroup.get(field);
+  _getValue = (field) => this._getControl(field).value;
 
-  public collectionData: Discovery[] | Comment[] | any[] = [];
-  public collection = this.collectionData;
-
-  protected _observableSearch() {
+  _observableSearch() {
     this._searchService.search$.pipe(takeUntil(this._destroyed))
     .subscribe((value) => {
       const searchResult = this.collectionData.filter((collection) => (
@@ -33,7 +33,7 @@ export abstract class FormBase {
     });
   }
 
-  protected _filterSearch(collection: Discovery | Comment, value: string): boolean {
+  _filterSearch(collection: Discovery | Comment, value: string): boolean {
     if (!value) {
       return true;
     }
@@ -51,10 +51,10 @@ export abstract class FormBase {
     this.formGroup.reset();
   }
 
-  protected abstract _getAll();
-  protected abstract _createForm();
-  protected abstract _create(payload: Discovery | Comment);
-  protected abstract _update(_id: string, payload: Discovery | Comment);
+  abstract _getAll();
+  abstract _createForm();
+  abstract _create(payload: Discovery | Comment);
+  abstract _update(_id: string, payload: Discovery | Comment);
   abstract onSave();
   abstract onEdit(discovery: Discovery | Comment);
   abstract onRemove({ _id }: Discovery | Comment, index: number);

@@ -34,7 +34,7 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
   }
 
 
-  protected _getAll() {
+  _getAll() {
     this._commentService.getAll().pipe(take(1))
     .subscribe((collection) => {
       if (collection.status === 500) {
@@ -47,7 +47,7 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
     });
   }
 
-  protected _createForm() {
+  _createForm() {
     this.formGroup = this._fb.group({
       _id: [''],
       title: [''],
@@ -55,23 +55,7 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
     });
   }
 
-
-  onSave() {
-    if (!this._getValue('title') && !this._getValue('description')) {
-      return;
-    }
-
-    const payload: Comment = {
-      description: this._getValue('description')
-    }
-
-    if (this._getValue('_id')) {
-      return this._update(this._getValue('_id'), payload);
-    }
-    return this._create(payload);
-  }
-
-  protected _create(payload: Comment) {
+  _create(payload: Comment) {
     this._commentService.save(payload).pipe(take(1))
     .subscribe((comment) => {
 
@@ -89,7 +73,7 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
     })
   }
 
-  protected _update(_id: string, payload: Comment) {
+  _update(_id: string, payload: Comment) {
     this._commentService.update(_id, payload).pipe(take(1))
     .subscribe((comment) => {
 
@@ -111,6 +95,21 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
     })
   }
 
+  onSave() {
+    if (!this._getValue('title') && !this._getValue('description')) {
+      return;
+    }
+
+    const payload: Comment = {
+      description: this._getValue('description')
+    }
+
+    if (this._getValue('_id')) {
+      return this._update(this._getValue('_id'), payload);
+    }
+    return this._create(payload);
+  }
+  
   onEdit(comment: Comment) {
     this._getControl('_id').setValue(comment._id);
     this._getControl('description').setValue(comment.description);

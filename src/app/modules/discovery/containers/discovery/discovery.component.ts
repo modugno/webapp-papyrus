@@ -33,8 +33,7 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
     this._destroyed.complete();
   }
 
-
-  protected _getAll() {
+  _getAll() {
     this._discoveryService.getAll().pipe(take(1))
     .subscribe((collection) => {
       if (collection.status === 500) {
@@ -47,7 +46,7 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
     });
   }
 
-  protected _createForm() {
+  _createForm() {
     this.formGroup = this._fb.group({
       _id: [''],
       title: [''],
@@ -55,24 +54,7 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
     });
   }
 
-
-  onSave() {
-    if (!this._getValue('title') && !this._getValue('description')) {
-      return;
-    }
-
-    const payload: Discovery = {
-      title: this._getValue('title'),
-      description: this._getValue('description')
-    }
-
-    if (this._getValue('_id')) {
-      return this._update(this._getValue('_id'), payload);
-    }
-    return this._create(payload);
-  }
-
-  protected _create(payload: Discovery) {
+  _create(payload: Discovery) {
     this._discoveryService.save(payload).pipe(take(1))
     .subscribe((discovery) => {
 
@@ -90,7 +72,7 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
     })
   }
 
-  protected _update(_id: string, payload: Discovery) {
+  _update(_id: string, payload: Discovery) {
     this._discoveryService.update(_id, payload).pipe(take(1))
     .subscribe((discovery) => {
 
@@ -112,6 +94,22 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
     })
   }
 
+  onSave() {
+    if (!this._getValue('title') && !this._getValue('description')) {
+      return;
+    }
+
+    const payload: Discovery = {
+      title: this._getValue('title'),
+      description: this._getValue('description')
+    }
+
+    if (this._getValue('_id')) {
+      return this._update(this._getValue('_id'), payload);
+    }
+    return this._create(payload);
+  }
+  
   onEdit(discovery: Discovery) {
     this._getControl('_id').setValue(discovery._id);
     this._getControl('title').setValue(discovery.title);
