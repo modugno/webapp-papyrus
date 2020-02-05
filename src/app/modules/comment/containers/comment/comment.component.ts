@@ -74,8 +74,10 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
   }
 
   _update(payload: Comment) {
+    console.log(payload);
     this._commentService.update(payload._id, payload).pipe(take(1))
     .subscribe((comment) => {
+      debugger;
 
       this.formGroup.reset();
 
@@ -105,6 +107,7 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
     }
 
     if (this._getValue('_id')) {
+      payload['_id'] = this._getValue('_id');
       return this._update(payload);
     }
     return this._create(payload);

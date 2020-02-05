@@ -105,6 +105,7 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
     }
 
     if (this._getValue('_id')) {
+      payload['_id'] = this._getValue('_id');
       return this._update(payload);
     }
     return this._create(payload);
