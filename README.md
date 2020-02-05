@@ -32,3 +32,7 @@ tendem a demorar um pouco, por conta do Heroku deixar o servidor dormindo de tem
 ## Build
 
 `$ npm run build`
+
+## Tests
+`$ ng test`
+> Os testes não estão todos concluídos, por hora está parcialmente testado.
