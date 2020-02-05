@@ -73,8 +73,8 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
     })
   }
 
-  _update(_id: string, payload: Comment) {
-    this._commentService.update(_id, payload).pipe(take(1))
+  _update(payload: Comment) {
+    this._commentService.update(payload._id, payload).pipe(take(1))
     .subscribe((comment) => {
 
       this.formGroup.reset();
@@ -85,7 +85,7 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
       }
 
       const newcollection = (this.collectionData as Comment[]).map((comment) => {
-        return (comment._id === _id)
+        return (comment._id === payload._id)
         ? { ...comment, ...payload }
         : comment;
       });
@@ -105,7 +105,7 @@ export class CommentComponent extends FormBase implements OnInit, OnDestroy {
     }
 
     if (this._getValue('_id')) {
-      return this._update(this._getValue('_id'), payload);
+      return this._update(payload);
     }
     return this._create(payload);
   }

@@ -54,7 +54,7 @@ export abstract class FormBase {
   abstract _getAll();
   abstract _createForm();
   abstract _create(payload: Discovery | Comment);
-  abstract _update(_id: string, payload: Discovery | Comment);
+  abstract _update(payload: Discovery | Comment);
   abstract onSave();
   abstract onEdit(discovery: Discovery | Comment);
   abstract onRemove({ _id }: Discovery | Comment, index: number);

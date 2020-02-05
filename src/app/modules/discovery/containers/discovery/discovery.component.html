@@ -38,8 +38,8 @@
           <span pp-card-description *ngIf="discovery.description">{{ discovery.description }}</span>
           <span pp-card-date *ngIf="discovery.date">{{ discovery.date | date: 'dd/MM/yyy hh:mm' }}</span>
           <ng-container pp-card-action>
-            <button pp-button color="neutral" (click)="onEdit(discovery)">Editar</button>
-            <button pp-button color="danger" (click)="onRemove(discovery, i)">Remover</button>
+            <button class="pp__btn-edit" pp-button color="neutral" (click)="onEdit(discovery)">Editar</button>
+            <button class="pp__btn-remove" pp-button color="danger" (click)="onRemove(discovery, i)">Remover</button>
           </ng-container>
         </pp-card>
       </div>

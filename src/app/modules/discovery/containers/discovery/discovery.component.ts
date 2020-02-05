@@ -72,8 +72,8 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
     })
   }
 
-  _update(_id: string, payload: Discovery) {
-    this._discoveryService.update(_id, payload).pipe(take(1))
+  _update(payload: Discovery) {
+    this._discoveryService.update(payload._id, payload).pipe(take(1))
     .subscribe((discovery) => {
 
       this.formGroup.reset();
@@ -84,7 +84,7 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
       }
 
       const newcollection = (this.collectionData as Discovery[]).map((discovery) => {
-        return (discovery._id === _id)
+        return (discovery._id === payload._id)
         ? { ...discovery, ...payload }
         : discovery;
       });
@@ -105,20 +105,19 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
     }
 
     if (this._getValue('_id')) {
-      return this._update(this._getValue('_id'), payload);
+      return this._update(payload);
     }
     return this._create(payload);
   }
-  
+
   onEdit(discovery: Discovery) {
     this._getControl('_id').setValue(discovery._id);
     this._getControl('title').setValue(discovery.title);
     this._getControl('description').setValue(discovery.description);
     window.scrollTo(0, 0);
-
   }
 
-  onRemove({ _id }: Discovery, index: number) {
+  onRemove({ _id }: Discovery) {
     this._discoveryService.delete(_id).pipe(take(1))
     .subscribe((discovery) => {
       if (discovery.status == 500) {
@@ -126,7 +125,7 @@ export class DiscoveryComponent extends FormBase implements OnInit, OnDestroy {
         return;
       }
 
-      this.collectionData.splice(index, 1);
+      this.collectionData = this.collectionData.filter((collection) => collection._id !== _id);
       this.collection = this.collectionData;
     });
   }
